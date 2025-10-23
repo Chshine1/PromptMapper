@@ -2,14 +2,7 @@
 
 public class AIClientOptions
 {
-    public AIClientOptions(string model, string apiKey, string baseUrl)
-    {
-        Model = model;
-        ApiKey = apiKey;
-        BaseUrl = baseUrl;
-    }
-
-    public string Model { get; set; }
-    public string ApiKey { get; set; }
-    public string BaseUrl { get; set; }
+    public string Model { get; set; } = string.Empty;
+    public string ApiKey { get; set; } = string.Empty;
+    public string BaseUrl { get; set; } = string.Empty;
 }

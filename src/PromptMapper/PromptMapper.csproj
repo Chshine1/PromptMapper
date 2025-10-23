@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net6.0;net9.0</TargetFrameworks>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\PromptMapper.JsonSchema\PromptMapper.JsonSchema.csproj" />
+      <ProjectReference Include="..\PromptMapper.Abstractions\PromptMapper.Abstractions.csproj" />
+      <ProjectReference Include="..\PromptMapper.Core\PromptMapper.Core.csproj" />
+      <ProjectReference Include="..\PromptMapper.Extensions\PromptMapper.Extensions.csproj" />
+    </ItemGroup>
+
+</Project>

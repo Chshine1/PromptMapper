@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PromptMapper.Abstractions.Metadata.Attributes
+namespace PromptMapper.Abstractions.ResponseFormats.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class ResponsePropertyAttribute : Attribute

@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Schema;
 #endif
-using PromptMapper.Abstractions.Interfaces;
+using PromptMapper.Core.JsonSchema;
 
 namespace PromptMapper.SystemTextJson;
 

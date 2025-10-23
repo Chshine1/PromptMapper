@@ -1,8 +1,8 @@
-﻿using PromptMapper.Abstractions.Interfaces;
-using PromptMapper.Abstractions.Interfaces.ResponseFormat;
-using PromptMapper.Abstractions.Metadata;
+﻿using PromptMapper.Abstractions.Metadata;
+using PromptMapper.Abstractions.ResponseFormats;
+using PromptMapper.Core.JsonSchema;
 
-namespace PromptMapper.Core.Implementations;
+namespace PromptMapper.Core.ResponseFormats;
 
 public class ResponseMessageCompiler : IResponseMessageCompiler
 {
@@ -20,11 +20,6 @@ public class ResponseMessageCompiler : IResponseMessageCompiler
         var schema = _jsonSchemaGenerator.GenerateJsonSchema(type);
         var metadata = _metadataExtractor.GetMetadata(type);
         return $"Respond strictly with JSON matching this schema:\n{schema}\n{GenerateDescription(metadata)}";
-    }
-
-    public IResponseMessage CompileA(Type type)
-    {
-        throw new NotImplementedException();
     }
 
     private static string GenerateDescription(ModelMetadata metadata)

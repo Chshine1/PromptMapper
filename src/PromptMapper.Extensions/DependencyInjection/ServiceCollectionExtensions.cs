@@ -1,11 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PromptMapper.Abstractions.Interfaces;
-using PromptMapper.Abstractions.Interfaces.MessageTemplate;
-using PromptMapper.Abstractions.Interfaces.ResponseFormat;
+using PromptMapper.Abstractions.MessageTemplates;
 using PromptMapper.Abstractions.Metadata;
-using PromptMapper.Core.Implementations;
-using PromptMapper.Core.MessageTemplate;
+using PromptMapper.Abstractions.PromptCore;
+using PromptMapper.Abstractions.ResponseFormats;
+using PromptMapper.Core.JsonSchema;
+using PromptMapper.Core.MessageTemplates;
 using PromptMapper.Core.Metadata;
+using PromptMapper.Core.PromptCore;
+using PromptMapper.Core.ResponseFormats;
 using PromptMapper.SystemTextJson;
 
 namespace PromptMapper.Extensions.DependencyInjection;

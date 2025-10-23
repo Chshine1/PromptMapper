@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PromptMapper.Abstractions.Metadata.Attributes
+namespace PromptMapper.Abstractions.MessageTemplates.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class MessageTemplateAttribute : Attribute

@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace PromptMapper.Abstractions.Interfaces
+namespace PromptMapper.Abstractions.PromptCore
 {
     public interface IPromptEngine<TResponse> where TResponse : class
     {
@@ -17,13 +17,7 @@ namespace PromptMapper.Abstractions.Interfaces
         /// Check whether the whole prompt is filled.
         /// </summary>
         bool IsFilled();
-        
-        /// <summary>
-        /// Execute the full prompt and get its result.
-        /// </summary>
-        /// <returns>The result in the given type.</returns>
-        Task<TResponse> ExecuteAsync();
-        
-        string GetPrompt();
+
+        IReadOnlyList<PromptMessage> GetPrompt();
     }
 }

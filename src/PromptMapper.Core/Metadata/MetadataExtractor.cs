@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
+using System.Text.Json.Serialization;
+using PromptMapper.Abstractions.MessageTemplates.Attributes;
 using PromptMapper.Abstractions.Metadata;
-using PromptMapper.Abstractions.Metadata.Attributes;
+using PromptMapper.Abstractions.ResponseFormats.Attributes;
 
 namespace PromptMapper.Core.Metadata;
 
@@ -10,7 +12,7 @@ public class MetadataExtractor : IMetadataExtractor
     
     private readonly IEnumerable<IMetadataExtender> _extenders;
     
-    public MetadataExtractor(IEnumerable<IMetadataExtender>? extenders)
+    public MetadataExtractor(IEnumerable<IMetadataExtender>? extenders = null)
     {
         _extenders = extenders?.OrderBy(e => e.Order) ?? Enumerable.Empty<IMetadataExtender>();
     }
@@ -53,6 +55,15 @@ public class MetadataExtractor : IMetadataExtractor
         {
             IsIgnored = false
         };
+        
+        var jsonIgnoreAttribute = property.GetCustomAttribute<JsonIgnoreAttribute>();
+        if (jsonIgnoreAttribute != null)
+        {
+            metadata.IsIgnored = true;
+        }
+        
+        var jsonPropertyNameAttribute = property.GetCustomAttribute<JsonPropertyNameAttribute>();
+        metadata.JsonName = jsonPropertyNameAttribute?.Name ?? property.Name;
 
         var propertyAttribute = property.GetCustomAttribute<ResponsePropertyAttribute>();
         if (propertyAttribute == null)

@@ -1,6 +1,4 @@
-﻿using OpenAI.Chat;
-
-namespace PromptMapper.Abstractions.Interfaces
+﻿namespace PromptMapper.Abstractions.PromptCore
 {
     public interface IPromptAssembler
     {
@@ -11,7 +9,7 @@ namespace PromptMapper.Abstractions.Interfaces
         /// <param name="key">An optional key for the template, distinct templates registered from the same type.</param>
         /// <typeparam name="TTemplate">The type for generating the template, labeled by MessageTemplateAttribute.</typeparam>
         /// <returns>The new conversation template.</returns>
-        IPromptAssembler WithMessageTemplate<TTemplate>(ChatMessageRole role, string? key = null) where TTemplate : class;
+        IPromptAssembler WithMessageTemplate<TTemplate>(string role, string? key = null) where TTemplate : class;
 
         /// <summary>
         /// Add a fixed message to the current conversation template.
@@ -19,7 +17,7 @@ namespace PromptMapper.Abstractions.Interfaces
         /// <param name="role">Message role.</param>
         /// <param name="message">Message content.</param>
         /// <returns>The new conversation template.</returns>
-        IPromptAssembler WithStaticMessage(ChatMessageRole role, string message);
+        IPromptAssembler WithStaticMessage(string role, string message);
 
         /// <summary>
         /// Assigns to the template a response type, then compiles to a conversation.

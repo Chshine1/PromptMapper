@@ -1,64 +1,60 @@
 ﻿using System.Text.Json.Serialization;
-using OpenAI.Chat;
-using PromptMapper.Abstractions.Metadata.Attributes;
-using PromptMapper.Core.Implementations;
-using PromptMapper.Core.MessageTemplate;
-using PromptMapper.Core.Metadata;
-using PromptMapper.SystemTextJson;
+using Microsoft.Extensions.DependencyInjection;
+using PromptMapper.Abstractions.MessageTemplates.Attributes;
+using PromptMapper.Abstractions.PromptCore;
+using PromptMapper.Abstractions.ResponseFormats.Attributes;
+using PromptMapper.Core.PromptCore;
+using PromptMapper.Extensions.DependencyInjection;
 using Xunit.Abstractions;
+// ReSharper disable UnusedAutoPropertyAccessor.Local
+// ReSharper disable ClassNeverInstantiated.Local
+// ReSharper disable UnusedMember.Local
 
 namespace PromptMapper.Tests.Unit;
 
 public class SchemaPromptGenerationTest(ITestOutputHelper testOutputHelper)
 {
-    [MessageTemplate(Template = "You are a helpful assistant, take the number {TestNumber}, and return me with it added by 1.")]
+    [MessageTemplate(Template = "Take the number {TestNumber}, and return me with it added by 1.")]
     private class TestPrompt
     {
         public int TestNumber { get; set; }
     }
 
     [ResponseFormat]
-    // ReSharper disable once ClassNeverInstantiated.Local
     private class TestModel
     {
         [JsonPropertyName("test_property")]
         [ResponseProperty(Description = "an integer where you put your result")]
         public int TestProperty { get; set; }
+        
+        [JsonPropertyName("additional_info")]
+        [ResponseProperty(Description = "anything you like", Constraints = "length should be smaller than 20")]
+        public required string AdditionalInformation { get; set; }
 
         [JsonIgnore] public string FuckYou { get; set; } = string.Empty;
-    }
 
-    [Fact]
-    public void GenerateJsonSchema_Success_Test()
-    {
-        var generator = new JsonSchemaGenerator();
-        var result = generator.GenerateJsonSchema(typeof(TestModel));
-        testOutputHelper.WriteLine(result);
+        public override string ToString()
+        {
+            return $"{{ TestProperty: {TestProperty}, AdditionalInformation: {AdditionalInformation} }}";
+        }
     }
-
+    
     [Fact]
-    public void GenerateSchemaPrompt_Success_Test()
+    public async Task GenerateFullPrompt_Success_Test()
     {
-        var metadataProvider = new MetadataExtractor([new JsonMetadataExtender()]);
-        var jsonGenerator = new JsonSchemaGenerator();
-        var schemaGenerator = new ResponseMessageCompiler(jsonGenerator, metadataProvider);
-        testOutputHelper.WriteLine(schemaGenerator.Compile(typeof(TestModel)));
-    }
-
-    [Fact]
-    public void GenerateFullPrompt_Success_Test()
-    {
-        var metadataProvider = new MetadataExtractor([new JsonMetadataExtender()]);
-        var jsonGenerator = new JsonSchemaGenerator();
-        var schemaGenerator = new ResponseMessageCompiler(jsonGenerator, metadataProvider);
-        var templateGenerator = new MessageTemplateCompiler(metadataProvider);
+        var serviceProvider = new ServiceCollection()
+            .AddTemplateCore()
+            .AddSingleton<IAIClient, AIClient>(_ => new AIClient())
+            .BuildServiceProvider();
         
-        var template = new PromptAssembler(templateGenerator, schemaGenerator)
-            .WithMessageTemplate<TestPrompt>(ChatMessageRole.System)
+        var template = serviceProvider.GetRequiredService<IPromptAssembler>()
+            .WithStaticMessage(PromptMessage.Roles.System, "You are a helpful assistant. Handle the user's task:")
+            .WithMessageTemplate<TestPrompt>(PromptMessage.Roles.User)
             .WithResponseFormat<TestModel>();
-        var prompt = template
-            .FillMessage(new TestPrompt { TestNumber = 1 })
-            .GetPrompt();
-        testOutputHelper.WriteLine(prompt);
+
+        var e = template
+            .FillMessage(new TestPrompt { TestNumber = 3 });
+        var t = await new PromptExecutor<TestModel>(e, serviceProvider.GetRequiredService<IAIClient>()).ExecuteAsync();
+        testOutputHelper.WriteLine(t.ToString());
     }
 }

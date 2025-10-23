@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PromptMapper.Abstractions.Metadata.Attributes
+namespace PromptMapper.Abstractions.ResponseFormats.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class ResponseFormatAttribute : Attribute

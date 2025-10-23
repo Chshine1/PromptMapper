@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using PromptMapper.Abstractions.Interfaces.MessageTemplate;
+using PromptMapper.Abstractions.MessageTemplates;
 
-namespace PromptMapper.Core.MessageTemplate;
+namespace PromptMapper.Core.MessageTemplates;
 
 public class MessageTemplate<TTemplate> : IMessageTemplate<TTemplate> where TTemplate : class
 {

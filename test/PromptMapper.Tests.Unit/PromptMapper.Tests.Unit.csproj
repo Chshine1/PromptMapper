@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\PromptMapper.SystemTextJson\PromptMapper.SystemTextJson.csproj" />
+      <ProjectReference Include="..\..\PromptMapper.JsonSchema\PromptMapper.JsonSchema.csproj" />
       <ProjectReference Include="..\..\src\PromptMapper.Abstractions\PromptMapper.Abstractions.csproj" />
       <ProjectReference Include="..\..\src\PromptMapper.Core\PromptMapper.Core.csproj" />
       <ProjectReference Include="..\..\src\PromptMapper.Extensions\PromptMapper.Extensions.csproj" />

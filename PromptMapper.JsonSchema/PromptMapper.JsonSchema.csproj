@@ -4,6 +4,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <TargetFrameworks>net6.0;net9.0</TargetFrameworks>
+        <RootNamespace>PromptMapper.SystemTextJson</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

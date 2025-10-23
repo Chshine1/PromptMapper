@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromptMapper.Abstractions",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromptMapper.Core", "src\PromptMapper.Core\PromptMapper.Core.csproj", "{7EE6FC28-AE60-462C-A3A8-1C7173419099}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromptMapper.SystemTextJson", "PromptMapper.SystemTextJson\PromptMapper.SystemTextJson.csproj", "{A565ABE8-8B60-458F-934C-9E9A0F8061E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromptMapper.JsonSchema", "PromptMapper.JsonSchema\PromptMapper.JsonSchema.csproj", "{A565ABE8-8B60-458F-934C-9E9A0F8061E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromptMapper.Tests.Unit", "test\PromptMapper.Tests.Unit\PromptMapper.Tests.Unit.csproj", "{1822E774-D8CD-4665-B4D2-1E2A27034384}"
 EndProject

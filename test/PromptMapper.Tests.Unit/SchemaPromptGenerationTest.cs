@@ -44,7 +44,6 @@ public class SchemaPromptGenerationTest(ITestOutputHelper testOutputHelper)
     {
         var serviceProvider = new ServiceCollection()
             .AddTemplateCore()
-            .AddSingleton<IAIClient, AIClient>(_ => new AIClient())
             .BuildServiceProvider();
         
         var template = serviceProvider.GetRequiredService<IPromptAssembler>()

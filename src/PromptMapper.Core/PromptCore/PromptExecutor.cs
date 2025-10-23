@@ -17,14 +17,6 @@ public class PromptExecutor<TResponse> : IPromptExecutor<TResponse> where TRespo
     public async Task<TResponse> ExecuteAsync()
     {
         var messages = _engine.GetPrompt();
-        var result = await _client.SendPromptAsync(messages);
-        
-        using var document = JsonDocument.Parse(result);
-        var root = document.RootElement;
-
-        var choices = root.GetProperty("choices");
-        var firstChoice = choices[0];
-        var messageElement = firstChoice.GetProperty("message").GetProperty("content");
-        return JsonSerializer.Deserialize<TResponse>(messageElement.GetString()!)!;
+        return JsonSerializer.Deserialize<TResponse>(await _client.SendPromptAsync(messages))!;
     }
 }

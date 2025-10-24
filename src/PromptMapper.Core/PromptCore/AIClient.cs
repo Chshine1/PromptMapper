@@ -15,6 +15,8 @@ public class AIClient : IAIClient
     {
         _options = options.Value;
         _httpClient = httpClient ?? new HttpClient();
+        
+        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_options.ApiKey}");
     }
     
     public async Task<string> SendPromptAsync(IReadOnlyList<PromptMessage> messages)
@@ -23,8 +25,6 @@ public class AIClient : IAIClient
         {
             model = _options.Model, messages
         };
-        
-        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_options.ApiKey}");
         
         var response = await (await _httpClient.PostAsJsonAsync(_options.BaseUrl, request)).Content.ReadAsStringAsync();
         

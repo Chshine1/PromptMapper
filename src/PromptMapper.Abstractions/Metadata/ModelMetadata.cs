@@ -9,6 +9,7 @@ namespace PromptMapper.Abstractions.Metadata
         public List<ModelPropertyMetadata> Properties { get; set; } = new List<ModelPropertyMetadata>();
         
         public bool IsMessageTemplate { get; set; }
-        public string Template { get; set; } = string.Empty;
+        public string TemplateName { get; set; } = string.Empty;
+        public List<string> Keys { get; set; } = new List<string>();
     }
 }

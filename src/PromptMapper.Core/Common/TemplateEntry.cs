@@ -2,19 +2,7 @@
 
 namespace PromptMapper.Core.Common;
 
-public interface IMessageEntry
-{
-    bool IsStatic { get; }
-    bool IsRendered { get; }
-    Type? TemplateType { get; }
-    
-    void Render(object? instance);
-    string RenderedMessage { get; }
-
-    string Role { get; }
-}
-
-public abstract class MessageEntry : IMessageEntry
+public abstract class MessageEntry
 {
     public bool IsStatic { get; }
     public bool IsRendered { get; protected set; }

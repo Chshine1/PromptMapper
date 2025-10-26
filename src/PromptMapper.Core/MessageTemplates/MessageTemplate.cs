@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
+using System.Text.RegularExpressions;
 using PromptMapper.Abstractions.MessageTemplates;
 
 namespace PromptMapper.Core.MessageTemplates;
@@ -14,31 +15,17 @@ public class MessageTemplate<TTemplate> : IMessageTemplate<TTemplate> where TTem
         _parameters = ExtractParameters(template);
     }
 
-    public Type TemplateType => typeof(TTemplate);
-    
     public string Render(TTemplate templateInstance)
     {
-        var result = _template;
+        var builder = new StringBuilder(_template);
         foreach (var param in _parameters)
         {
             var value = param.Value(templateInstance);
-            result = result.Replace(param.Key, value);
+            builder.Replace(param.Key, value);
         }
-        return result;
+        return builder.ToString();
     }
 
-    public string Render(object instance)
-    {
-        if (instance is TTemplate template)
-        {
-            return Render(template);
-        }
-        else
-        {
-            throw new ArgumentException($"{instance.GetType()} is not a valid template type");
-        }
-    }
-    
     private static Dictionary<string, Func<TTemplate, string>> ExtractParameters(string template)
     {
         var parameters = new Dictionary<string, Func<TTemplate, string>>();

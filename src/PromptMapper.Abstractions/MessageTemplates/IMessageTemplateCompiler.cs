@@ -2,6 +2,6 @@
 {
     public interface IMessageTemplateCompiler
     {
-        IMessageTemplate<TTemplate> Compile<TTemplate>(string? template = null) where TTemplate : class;
+        IMessageTemplate<TTemplate> Compile<TTemplate>(string? key = null) where TTemplate : class;
     }
 }

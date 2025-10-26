@@ -19,10 +19,10 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IMetadataExtractor, MetadataExtractor>();
         services.AddSingleton<IJsonSchemaGenerator, JsonSchemaGenerator>();
         
-        services.AddSingleton<IMessageTemplateCompiler, MessageTemplateCompiler>();
+        services.AddSingleton<IMessageTemplateCompiler, HotReloadMessageTemplateCompiler>();
         services.AddSingleton<IResponseMessageCompiler, ResponseMessageCompiler>();
-            
-        services.AddTransient<IPromptAssembler, PromptAssembler>();
+
+        services.AddSingleton<PromptAssemblerFactory>();
             
         return services;
     }

@@ -37,11 +37,12 @@ public class MetadataExtractor : IMetadataExtractor
             return metadata;
         }
 
-        var requestAttribute = type.GetCustomAttribute<MessageTemplateAttribute>();
-        if (requestAttribute != null)
+        var requestAttributes = type.GetCustomAttributes<MessageTemplateAttribute>();
+        foreach (var requestAttribute in requestAttributes)
         {
             metadata.IsMessageTemplate = true;
-            metadata.Template = requestAttribute.Template;
+            metadata.TemplateName = string.IsNullOrWhiteSpace(requestAttribute.TemplateName) ? type.Name : requestAttribute.TemplateName;
+            if (!string.IsNullOrWhiteSpace(requestAttribute.Key)) metadata.Keys.Add(requestAttribute.Key);
         }
         
         _modelMetadata.Add(type, metadata);

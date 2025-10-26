@@ -2,9 +2,11 @@
 
 namespace PromptMapper.Abstractions.MessageTemplates.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MessageTemplateAttribute : Attribute
     {
-        public string Template { get; set; } = string.Empty;
+        public string TemplateName { get; set; } = string.Empty;
+        
+        public string Key { get; set; } = string.Empty;
     }
 }

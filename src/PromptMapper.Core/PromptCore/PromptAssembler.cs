@@ -20,7 +20,7 @@ public class PromptAssembler : IPromptAssembler
     
     public IPromptAssembler WithMessageTemplate<TTemplate>(string role, string? key = null) where TTemplate : class
     {
-        var template = _messageTemplateCompiler.Compile<TTemplate>();
+        var template = _messageTemplateCompiler.Compile<TTemplate>(key);
         _messages.Add(new DynamicMessageEntry<TTemplate>(role, template));
         return this;
     }

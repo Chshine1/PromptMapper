@@ -4,11 +4,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <TargetFrameworks>net6.0;net9.0</TargetFrameworks>
-        <RootNamespace>PromptMapper.SystemTextJson</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\PromptMapper.Abstractions\PromptMapper.Abstractions.csproj" />
-      <ProjectReference Include="..\src\PromptMapper.Core\PromptMapper.Core.csproj" />
+      <ProjectReference Include="..\PromptMapper.Abstractions\PromptMapper.Abstractions.csproj" />
+      <ProjectReference Include="..\PromptMapper.Core\PromptMapper.Core.csproj" />
     </ItemGroup>
 </Project>

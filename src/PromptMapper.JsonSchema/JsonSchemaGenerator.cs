@@ -4,7 +4,7 @@ using System.Text.Json.Schema;
 #endif
 using PromptMapper.Core.JsonSchema;
 
-namespace PromptMapper.SystemTextJson;
+namespace PromptMapper.JsonSchema;
 
 public class JsonSchemaGenerator : IJsonSchemaGenerator
 {

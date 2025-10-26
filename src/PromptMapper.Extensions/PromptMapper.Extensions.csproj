@@ -11,6 +11,7 @@
       <ProjectReference Include="..\..\PromptMapper.JsonSchema\PromptMapper.JsonSchema.csproj" />
       <ProjectReference Include="..\PromptMapper.Abstractions\PromptMapper.Abstractions.csproj" />
       <ProjectReference Include="..\PromptMapper.Core\PromptMapper.Core.csproj" />
+      <ProjectReference Include="..\PromptMapper.JsonSchema\PromptMapper.JsonSchema.csproj" />
     </ItemGroup>
 
     <ItemGroup>
